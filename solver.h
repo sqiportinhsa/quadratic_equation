@@ -14,7 +14,8 @@ This file contains Equation solving module
 Right now it supports solving linear and guadratic equations
 */
 
-#pragma once
+#ifndef SOLVER_H
+#define SOLVER_H
 
 #include <stdio.h>
 
@@ -58,20 +59,22 @@ enum Num_of_roots solve_linear_equation(double a, double b, double *x);
 
 
 /*!
-\brief Checks if double number is equal to zero taking into account the calculation error
+\brief Checks if double number is equal to zero using calculation accuracy
 
-\param[in] num Double number that is needed to be checked
+\param[in] num Double to be checked
 
-\return true if num is equal to zero and false if not
+\return true if num is equal to zero and false otherwise
 */
 bool is_zero(double num);
 
 /*!
-\brief print message about error if condition is true
+\brief print error message if condition is true
 */
-#define ERROR_IF(condition)                                                                                          \
-	if (condition)                                                                                                   \
-		printf("Error %s.\nFunction: %s\nLine: %d\nFile: %s\n", #condition, __PRETTY_FUNCTION__, __LINE__, __FILE__);
+#define ERROR_IF(condition)                                                                                               \
+    do {                                                                                                                  \
+        if (condition)                                                                                                    \
+            printf("Error %s.\nFunction: %s\nLine: %d\nFile: %s\n", #condition, __PRETTY_FUNCTION__, __LINE__, __FILE__); \
+    } while (0)
 
 /*!
 \brief Assert analog 
@@ -80,3 +83,5 @@ bool is_zero(double num);
     if (!condition)                                                                                                          \
 		printf("Error %s is false.\nFunction: %s\nLine: %d\nFile: %s\n", #condition, __PRETTY_FUNCTION__, __LINE__, __FILE__);
 /*! @} */
+
+#endif

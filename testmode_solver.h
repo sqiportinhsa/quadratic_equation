@@ -15,7 +15,8 @@ Tests are keeped by stucture Test.
 test_completed function use this data to compare it with answers that Equation solving returns.
 */
 
-#pragma once
+#ifndef TESTMODE_SOLVER
+#define TESTMODE_SOLVER
 
 #include <cassert>
 #include "solver.h"
@@ -42,15 +43,17 @@ struct Test {
 void testmode();
 
 /*!
-\brief Check whether roots calculated by function are simular to answer from tests 
+\brief Check whether roots calculated by function are equal to answer from tests 
 For correct completing of test function returns true. 
-If test completed incorrectly it prints number of test? calculated answers and expected answers.
+If test completed incorrectly it prints number of test, evaluated answers and expected answers.
 
 \param[in] test Test from array
 \param[in] num_of_test Number of test
 
-\return true if answers are correct, false if not
+\return true if answers are correct, false otherwise
 */
 bool test_completed(struct Test test, int num_of_test);
 
 /*! @} */
+
+#endif

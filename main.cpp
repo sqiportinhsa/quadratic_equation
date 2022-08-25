@@ -5,9 +5,9 @@
 #include "user_input_solver.h"
 #include "testmode_solver.h"
 
-const char testmode_flag[] = "-test";
-const char terminal_solving_flag[] = "-term";
-const char help_flag[] = "-h";
+const char Testmode_flag[] = "-test";
+const char Command_line_solving_flag[] = "-cl";
+const char Help_flag[] = "-h";
 
 int main(int argc, const char* argv[]) {
     if (argc <= 1) {
@@ -36,26 +36,26 @@ int main(int argc, const char* argv[]) {
         return 0;
     }
 
-    if (strcmp(argv[1], testmode_flag) == 0) {
+    if (strcmp(argv[1], Testmode_flag) == 0) {
         testmode();
         return 0;
     }
 
-    if (strcmp(argv[1], help_flag) == 0) {
+    if (strcmp(argv[1], Help_flag) == 0) {
         printf("List of existing commands:\n");
-        printf("\t%s\tTest mode:            programm running unit tests\n", testmode_flag);
-        printf("\t%s\tHelp mode:            output of existing commands\n", help_flag);
-        printf("\t%s\tTerminal input mode:  solving with coefficients after %s\n", terminal_solving_flag, terminal_solving_flag);
+        printf("\t%s\tTest mode:            programm running unit tests\n", Testmode_flag);
+        printf("\t%s\tHelp mode:            output of existing commands\n", Help_flag);
+        printf("\t%s\tCommand line input mode:  solving with coefficients after %s\n", Command_line_solving_flag, Command_line_solving_flag);
         printf("Running programm without any command launch solving with console input coefficients");
         return 0;
     }
 
-    if(strcmp(argv[1], terminal_solving_flag) == 0) {
+    if(strcmp(argv[1], Command_line_solving_flag) == 0) {
         double a = 0;
         double b = 0;
         double c = 0;
 
-        if (!read_from_terminal(argc, argv, &a, &b, &c)) {
+        if (!read_from_command_line(argc, argv, &a, &b, &c)) {
             printf("Programm running was stopped.\n");
             printf("Thanks for choosing this solver. See you later!");
             return -1;
@@ -77,6 +77,6 @@ int main(int argc, const char* argv[]) {
         return 0;
     }
 
-    printf("Error: unexpected terminal input");
+    printf("Error: unexpected command line input");
     return -1;
 }

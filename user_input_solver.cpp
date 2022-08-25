@@ -8,7 +8,7 @@
 #include <ctype.h>
 #include "solver.h"
 
-bool read_from_terminal(int argc, const char *argv[], double *pa, double *pb, double *pc) {
+bool read_from_command_line(int argc, const char *argv[], double *pa, double *pb, double *pc) {
     ERROR_IF(pa == NULL);
     ERROR_IF(pb == NULL);
     ERROR_IF(pc == NULL);
@@ -24,7 +24,8 @@ bool read_from_terminal(int argc, const char *argv[], double *pa, double *pb, do
            sscanf (argv[2], "%lg%c", pa, &temp_char) == 1
         && sscanf (argv[3], "%lg%c", pb, &temp_char) == 1
         && sscanf (argv[4], "%lg%c", pc, &temp_char) == 1
-    )) {
+      ))
+    {
         printf("Incorrect input: NAN coefficients\n");
         return false;
     }
@@ -84,7 +85,7 @@ void print_roots(double x1, double x2, enum Num_of_roots root_number) {
 bool read_coefficient(double *coef) {
     ERROR_IF(coef == NULL);
 
-    int exit = 1;
+    int exit_from_reading = 1;
     int num_of_read_numbers = 0;
 
     while(true) {
@@ -105,9 +106,9 @@ bool read_coefficient(double *coef) {
         printf("This coefficient is incorrect. Please, try again.\n");
         printf("If you want to try again enter any number exept 0. If you want to exit enter 0: ");
 
-        scanf("%d", &exit);
+        scanf("%d", &exit_from_reading);
 
-        if (exit == 0) {
+        if (exit_from_reading == 0) {
             return false;
         }
 

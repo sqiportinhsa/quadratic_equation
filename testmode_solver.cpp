@@ -36,13 +36,13 @@ bool test_completed(struct Test test, int num_of_test) {
     double calculated_x2;
     enum Num_of_roots calculated_roots_num = solve_quadratic_equation(test.a, test.b, test.c, &calculated_x1, &calculated_x2);
 
-    if (test.roots_num == calculated_roots_num) {
+    if (is_zero(test.roots_num - calculated_roots_num)) {
         switch (test.roots_num) {
         case NO_ROOTS:
             return true;
         
         case ONE_ROOT:
-            if (test.x1 == calculated_x1) {
+            if (is_zero(test.x1 - calculated_x1)) {
                 return true;
             }
             printf("TEST %d FAILED\n\tCoefficients: a = %lg, b = %lg, c = %lg\n", num_of_test, test.a, test.b, test.c);
@@ -51,10 +51,10 @@ bool test_completed(struct Test test, int num_of_test) {
             return false;
 
         case TWO_ROOTS:
-            if (calculated_x1 == test.x1 && calculated_x2 == test.x2) {
+            if (is_zero(calculated_x1 - test.x1) && is_zero(calculated_x2 - test.x2)) {
                 return true;
             }
-            if (calculated_x1 == test.x2 && calculated_x1 == test.x1) {
+            if (is_zero(calculated_x1 - test.x2) && is_zero(calculated_x1 - test.x1)) {
                 return true;
             }
             printf("TEST %d FAILED\n\tCoefficients: a = %lg, b = %lg, c = %lg\n", num_of_test, test.a, test.b, test.c);
